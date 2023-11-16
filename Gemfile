@@ -5,6 +5,7 @@ ruby "3.1.4"
 gem 'bootstrap-sass',       '3.2.0.4'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8"
+gem 'bcrypt','3.1.7'
 gem 'sass-rails'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
