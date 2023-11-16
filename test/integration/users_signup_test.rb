@@ -11,6 +11,12 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                          password_confirmation: "bar" } }
     end
     assert_template 'users/new'
+    assert_select 'div#error_explanation' do
+      assert_select 'div.alert.alert-danger', text: 'The form contains 4 errors.' # текст сообщения об ошибке 
+      assert_select 'ul' do
+        assert_select 'li', count: 4 #количество элементов li соответствует количеству ошибок
+      end
+    end
   end
   
   test "valid signup information" do
@@ -23,6 +29,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'users/show'
+    assert flash[:success]
   end
   
 end
