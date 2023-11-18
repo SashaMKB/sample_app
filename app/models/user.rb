@@ -8,16 +8,17 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   # Возвращает дайджест данной строки
-  def User.digest(string)
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
-  # Возвращает случайный токен
-  def User.new_token
+
+  # Возвращает случайный токен.
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
   # Запоминает пользователя в базе данных для использования в постоянной сессии.
